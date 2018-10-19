@@ -12,5 +12,22 @@
     </h:body>
     
     
+    <p:dataTable var="membre" value="#{vue.listeMembre}">
+            
+            <p:column headerText="Id">
+                <h:outputText value="#{membre.idMembre}" />
+            </p:column>
+
+            <p:column headerText="Nom">
+                <h:outputText value="#{membre.nomMembre}" />
+            </p:column>
+
+            <p:column headerText="Rang">
+                <h:outputText value="#{membre.idEquipe}" />
+            </p:column>
+
+        </p:dataTable>
+    
+    
 </html>
 
