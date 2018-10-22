@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <h:head>
         <title>Facelet Title</title>
@@ -12,7 +14,7 @@
     </h:body>
     
     
-    <p:dataTable var="membre" value="#{vue.listeMembre}">
+        <p:dataTable var="membre" value="#{vue.listeMembre}">
             
             <p:column headerText="Id">
                 <h:outputText value="#{membre.idMembre}" />
@@ -23,10 +25,60 @@
             </p:column>
 
             <p:column headerText="Rang">
-                <h:outputText value="#{membre.idEquipe}" />
+                <h:outputText value="#{membre.prenomMembre}" />
+            </p:column>
+            
+            <p:column headerText="Nom_Equipe">
+                <h:outputText value="#{membre.idEquipe.nomEquipe}" />
             </p:column>
 
         </p:dataTable>
+    
+    
+    
+     <h:form> 
+            <p:outputLabel for="nom" value="Nom:" />   
+            <p:inputText id="nom" value="#{vue.nom}" required="true" />        
+            <p:commandButton value="Submit" action="#{vue.ajouter()}" />
+        </h:form>
+        
+    
+    <h:form>  
+<!--         <p:growl id="growl" showDetail="true" sticky="true" />  
+        <p:commandButton value="Save" actionListener="{growlView.saveMessage}" action="{vue.ajouter()}" update="growl" />  
+      -->
+        <p:panel header="Growl">  
+            <h:panelGrid columns="2" cellpadding="5">  
+                <p:outputLabel for="id" value="Id:" />   
+                <p:inputText id="id" value="#{vue.id}" required="true" />  
+                <p:outputLabel for="nom" value="Nom:" />   
+                <p:inputText id="nom" value="#{vue.nom}" required="true" />  
+                <p:outputLabel for="prenom" value="Prenom:" />   
+                <p:inputText id="prenom" value="#{vue.prenom}" required="true" />   
+                <p:outputLabel for="code" value="Code:" />   
+                <p:inputText id="code" value="#{vue.pseudo}" required="true" />  
+<!--                <p:outputLabel for="code" value="Jeux:" />   
+                <p:inputText id="idjeux" value="{vue.idjeux}" required="true" />  -->
+        
+<!--            Envoie la liste des id jeux dans une drop down        -->
+                 <p:outputLabel for="jeux" value="Jeux:" />
+                 <p:selectOneMenu id="jeux" value="#{vue.idjeux}" style="width:125px">
+                     <c:forEach items="#{vue.listeJeux}" var="lejeux">
+                      <f:selectItem 
+                          itemValue="#{lejeux.idJeux}" 
+                          itemLabel="#{lejeux.idJeux}" 
+                           />   
+                     </c:forEach>   
+                 </p:selectOneMenu>
+                
+            </h:panelGrid>  
+            <h:commandButton value="valider" action="#{vue.ajouter()}"/>
+<!--             <p:commandButton value="Submit" action="{vue.ajouter()}"  />-->
+        </p:panel> 
+       
+    </h:form>
+    
+  
     
     
 </html>
